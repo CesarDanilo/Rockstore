@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductsList from '../ProductsList'
+import ProductsList from '../components/ProductsList'
 
 export default function ProductsPage({ products, addProductToCart }) {
   return (
@@ -15,3 +15,4 @@ export default function ProductsPage({ products, addProductToCart }) {
     </div>
   );
 }
+                                      

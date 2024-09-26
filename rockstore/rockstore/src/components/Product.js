@@ -20,7 +20,7 @@ export default function Product({
             {price} <span>BRL</span>
             </p>
            <div className="buttons">
-             <Link to="/products/123/checkout" className="btn-icon">
+             <Link onClick={() => addProductToCart(id)} to="cart/checkout" className="btn-icon">
                     <span>Comprar Agora</span>
                     <FontAwesomeIcon icon={faMoneyBill}/>
              </Link>

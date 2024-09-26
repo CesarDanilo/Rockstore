@@ -1,9 +1,9 @@
 import React from 'react'
-import Header from '../Header'
-import SidebarCart from '../SidebarCart'
-import ProductsList from '../ProductsList'
-import ExclusiveSection from '../ExclusiveSection'
-import ReviewsList from '../ReviewsList'
+import Header from '../components/Header'
+import SidebarCart from '../components/SidebarCart'
+import ProductsList from '../components/ProductsList'
+import ExclusiveSection from '../components/ExclusiveSection'
+import ReviewsList from '../components/ReviewsList'
 
 
 export default function HomePage({ products, addProductToCart,}) {
