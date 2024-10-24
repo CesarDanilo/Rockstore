@@ -1,4 +1,4 @@
-const { Users } = require("../../../database/models");
+const { Users } = require("../../../database/models/Users");
 
 const session = async (req, res, next) => {
     const { nome } = req.body;

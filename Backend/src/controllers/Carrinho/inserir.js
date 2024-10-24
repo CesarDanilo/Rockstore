@@ -1,4 +1,4 @@
-const { Carrinho } = require('../../database/models/');
+const { Carrinho } = require('../../database/models/Carrinho');
 
 const inserirCarrinho = async (req, resp, next) => {
 

@@ -1,7 +1,7 @@
-const { PedidoProduto } = require('../../database/models/PedidoProduto');
+const { Users } = require('../../database/models/Pedido');
 const { Op } = require('sequelize');
 
-const listarPedidoProduto = async (req, resp) => {
+const listarUsers = async (req, resp) => {
     const { offset, order, direction, nome, id } = req.query;
     let { limit } = req.query;
     limit = limit ? parseInt(limit) : 15;
@@ -36,14 +36,14 @@ const listarPedidoProduto = async (req, resp) => {
         }
 
         // Contando sem o limit e offset para poder criar a paginação
-        const countAll = await PedidoProduto.count({ where });
+        const countAll = await Users.count({ where });
 
         // Chamada find com where e os parâmetros de offset, limit, e order
-        const result = await PedidoProduto.findAll({
+        const result = await Users.findAll({
             ...options,
             order: orderOptions,
             where,
-            attributes: ['id', 'pedido_id', 'produto_id', 'quantidade', 'precoUnitario', 'createdAt', 'updatedAt'] // Incluindo apenas os atributos necessários
+            attributes: ['id', 'nome', 'email' ,'senha', 'admin', 'createdAt', 'updatedAt'] // Incluindo apenas os atributos necessários
         });
 
         return resp.status(200).json({
@@ -52,10 +52,10 @@ const listarPedidoProduto = async (req, resp) => {
             data: result
         });
     } catch (error) {
-        const msg = 'Erro ao tentar listar PedidoProduto';
+        const msg = 'Erro ao tentar listar Users';
         console.error(error);
         return resp.status(400).json({ msg, erro: error.message });
     }
 };
 
-module.exports = listarPedidoProduto;
+module.exports = listarUsers;

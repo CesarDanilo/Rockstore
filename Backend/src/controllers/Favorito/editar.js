@@ -1,18 +1,18 @@
-const { Pedido } = require('../../database/models/Pedido');
+const { Favoritos } = require('../../database/models/Favoritos');
 
-const editarPedido = async (req, resp, next) => {
+const editarFavoritos = async (req, resp, next) => {
 
     const { id } = req.params;
     try {
 
         const dados = req.body;
-        let result = await Pedido.findByPk(id);
+        let result = await Favoritos.findByPk(id);
 
         if (!result)
-            return resp.status(404).json({ msg: `Pedido ID ${id} não encontrado` });
+            return resp.status(404).json({ msg: `Favoritos ID ${id} não encontrado` });
 
         try {
-            await Pedido.update(dados, { where: { id } });
+            await Favoritos.update(dados, { where: { id } });
         }
         catch (error) {
             const msg = 'Erro ao tentar Gravar!';
@@ -20,15 +20,15 @@ const editarPedido = async (req, resp, next) => {
             return resp.status(400).json({ msg, erro });
         }
 
-        result = await Pedido.findByPk(id);
+        result = await Favoritos.findByPk(id);
 
         return resp.status(200).json({ msg: 'Gravado com Sucesso', data: result.dataValues });
     }
     catch (error) {
-        const msg = 'Pedido. Erro ao tentar Editar (generic).';
+        const msg = 'Favoritos. Erro ao tentar Editar (generic).';
         const erro = error?.message;
         return resp.status(400).json({ msg, erro });
     }
 }
 
-module.exports = editarPedido;
+module.exports = editarFavoritos;

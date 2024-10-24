@@ -1,17 +1,17 @@
-const { PedidoProduto } = require('../../database/models/PedidoProduto');
+const { Carrinho } = require('../../database/models/Carrinho');
 
-const excluirPedidoProduto = async (req, resp, next) => {
+const excluirCarrinho = async (req, resp, next) => {
 
     const { id } = req.params;
     try {
 
-        let result = await PedidoProduto.findByPk(id);
+        let result = await Carrinho.findByPk(id);
 
         if (!result)
-            return resp.status(404).json({ msg: `PedidoProduto ID ${id} não encontrado` });
+            return resp.status(404).json({ msg: `Carrinho ID ${id} não encontrado` });
 
         try {
-            result = await PedidoProduto.destroy({ where: { id } });
+            result = await Carrinho.destroy({ where: { id } });
         }
         catch (error) {
             const msg = 'Erro ao tentar Excluir!';
@@ -23,11 +23,11 @@ const excluirPedidoProduto = async (req, resp, next) => {
     }
     catch (error) {
 
-        const msg = 'PedidoProduto. Erro ao tentar Excluir (generic).';
+        const msg = 'Carrinho. Erro ao tentar Excluir (generic).';
         const erro = error?.message;
         return resp.status(400).json({ msg, erro });
     }
 }
 
 
-module.exports = excluirPedidoProduto;
+module.exports = excluirCarrinho;

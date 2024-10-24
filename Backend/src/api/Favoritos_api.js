@@ -1,7 +1,7 @@
 const express = require('express');
 const rotas = express.Router();
 
-const FavoritosControllers = require('../controllers/Carinho');
+const FavoritosControllers = require('../controllers/Favorito');
 
 // Rota para listar todos os favoritos
 rotas.get('/', FavoritosControllers.listarFavoritos);
