@@ -1,11 +1,26 @@
-const app = require('./src/api');
-const sequelize = require('./src/database/config');
+const express = require('express');
+const app = express();
+const port = 3001;
+const rotas = require('./routes');
+const cors = require('cors');
+const session = require('express-session');
 
-const PORT = process.env.PORT || 5000;
 
-sequelize.sync({ force: true }).then(() => {
-  console.log('Database & tables created!');
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
+// Middleware para parsear JSON
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({
+  origin: '*'
+}));
+
+app.get('/', (req, res) => {
+  res.send('Hello!');
+});
+
+app.use('/', rotas);
+
+// Iniciando o servidor
+app.listen(port, () => {
+  console.log(`Servidor rodando: http://localhost:${port}`);
 });
