@@ -1,4 +1,4 @@
-const { Favoritos } = require('../../database/models/Favoritos');
+const { Favoritos } = require('../../database/models/');
 
 const editarFavoritos = async (req, resp, next) => {
 

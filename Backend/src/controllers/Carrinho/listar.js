@@ -1,4 +1,4 @@
-const { Carrinho } = require('../../database/models/Carrinho');
+const { Carrinho, Produto } = require('../../database/models');
 const { Op } = require('sequelize');
 
 const listarCarrinho = async (req, resp) => {

@@ -1,4 +1,4 @@
-const { Carrinho } = require('../../database/models/Carrinho');
+const { Carrinho } = require('../../database/models/');
 
 const excluirCarrinho = async (req, resp, next) => {
 

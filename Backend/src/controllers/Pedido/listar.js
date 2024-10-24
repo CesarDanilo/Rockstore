@@ -1,4 +1,4 @@
-const { Pedido } = require('../../database/models/Pedido');
+const { Pedido } = require('../../database/models/');
 const { Op } = require('sequelize');
 
 const listarPedido = async (req, resp) => {

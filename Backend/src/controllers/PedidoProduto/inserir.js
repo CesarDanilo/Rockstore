@@ -1,4 +1,4 @@
-const { PedidoProduto } = require('../../database/models/PedidoProduto');
+const { PedidoProduto } = require('../../database/models/');
 
 const inserirPedidoProduto = async (req, resp, next) => {
 

@@ -1,4 +1,4 @@
-const { Produto } = require('../../database/models/Pedido');
+const { Produto } = require('../../database/models/');
 
 const excluirProduto = async (req, resp, next) => {
 

@@ -1,4 +1,4 @@
-const { Users } = require("../../../database/models/Users");
+const { Users } = require("../../../database/models/");
 
 
 const userLogin = async (req, res, next) => {

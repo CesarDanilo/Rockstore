@@ -1,4 +1,4 @@
-const { Favoritos } = require('../../database/models/Favoritos');
+const { Favoritos } = require('../../database/models/');
 const { Op } = require('sequelize');
 
 const listarFavoritos = async (req, resp) => {
