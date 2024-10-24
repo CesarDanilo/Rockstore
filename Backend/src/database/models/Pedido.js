@@ -1,44 +1,52 @@
 'use strict';
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/config'); // Certifique-se de que o caminho está correto
+const { Model, DataTypes } = require('sequelize');
 
-const Order = sequelize.define('Order', {
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    userId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'users', // Assumindo que existe uma tabela 'users'
-            key: 'id'
+module.exports = (sequelize) => {
+    class Pedido extends Model {
+        static associate(models) {
+            Pedido.hasMany(models.PedidoProduto, { foreignKey: 'pedido_id' });
+        }
+    };
+
+    Pedido.init({
+        id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-    },
-    status: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    totalAmount: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
-    },
-    createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    },
-    updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
-    }
-}, {
-    tableName: 'orders'
-});
+        usuario_id: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'Users',
+                key: 'id',
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'SET NULL'
+        },
+        status: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        valorTotal: {
+            type: DataTypes.FLOAT,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
+        }
+    }, {
+        sequelize,
+        modelName: 'Pedido',
+        tableName: 'Pedido',
+        timestamps: true
+    });
 
-module.exports = Order;
+    return Pedido;
+};

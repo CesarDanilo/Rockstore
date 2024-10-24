@@ -1,44 +1,59 @@
 'use strict';
-const { DataTypes } = require('sequelize');
-const sequelize = require('../config/config'); // Certifique-se de que o caminho está correto
+const { Model, DataTypes } = require('sequelize');
 
-const Cart = sequelize.define('Cart', {
+module.exports = (sequelize) => {
+  class Carrinho extends Model {
+    // Definir associações, se necessário
+    static associate(models) {
+      // Exemplo de associação, se aplicável:
+      Carrinho.belongsTo(models.Users, { foreignKey: 'usuario_id' });
+      Carrinho.belongsTo(models.Produto, { foreignKey: 'produto_id' });
+    }
+  };
+
+  Carrinho.init({
     id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      primaryKey: true,
+      allowNull: false
     },
-    productId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'products', // Assumindo que existe uma tabela 'products'
-            key: 'id'
-        },
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+    usuario_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Users', // Nome da tabela de usuários
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
     },
-    quantity: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+    produto_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Produto', // Nome da tabela de produtos
+        key: 'id'
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
     },
-    unitPrice: {
-        type: DataTypes.DECIMAL(10, 2),
-        allowNull: false
+    quantidade: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
+      type: DataTypes.DATE
     },
     updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: DataTypes.NOW
+      type: DataTypes.DATE
     }
-}, {
-    tableName: 'cart'
-});
+  }, {
+    sequelize,
+    modelName: 'Carrinho',
+    tableName: 'Carrinho',
+    timestamps: true  // Se 'createdAt' e 'updatedAt' devem ser geridos automaticamente
+  });
 
-module.exports = Cart;
+  return Carrinho;
+};

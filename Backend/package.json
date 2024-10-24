@@ -1,19 +1,38 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "1 - CRIAR TABELA",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "cross-env NODE_ENV=development nodemon ./src/server.js",
+    "createdb": "cross-env NODE_ENV=development npx sequelize db:create",
+    "createmigrate": "npx sequelize-cli migration:generate --name ",
+    "migrate": " cross-env NODE_ENV=development npx sequelize-cli db:migrate ",
+    "migrateundo": "cross-env NODE_ENV=development npx sequelize db:migrate:undo",
+    "migrateundoall": "cross-env NODE_ENV=development npx sequelize db:migrate:undo:all",
+    "createseeddev": "cross-env NODE_ENV=development npx sequelize seed:generate --name",
+    "seedersdev": "cross-env NODE_ENV=development npx sequelize-cli db:seed:all",
+    "seedersundodev": "cross-env NODE_ENV=development npx sequelize db:seed:undo",
+    "seedersundoalldev": "cross-env NODE_ENV=development npx sequelize db:seed:undo:all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.21.0",
-    "mysql2": "^3.11.3",
-    "nodemon": "^3.1.7",
-    "sequelize": "^6.37.3",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.4",
+    "pg": "^8.12.0",
+    "sequelize": "^6.37.3"
+  },
+  "devDependencies": {
+    "@types/multer": "^1.4.12",
     "sequelize-cli": "^6.6.2"
   }
 }
